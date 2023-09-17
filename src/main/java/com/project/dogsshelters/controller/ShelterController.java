@@ -36,7 +36,7 @@ public class ShelterController {
     }
 
     @DeleteMapping("/delete")
-    public String addShelter(@RequestParam String id) {
+    public String deleteShelter(@RequestParam String id) {
         return shelterService.deleteShelter(id);
     }
 

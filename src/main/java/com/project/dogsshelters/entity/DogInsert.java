@@ -1,47 +1,35 @@
 package com.project.dogsshelters.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
+public class DogInsert {
 
-import java.util.Optional;
-
-@Entity
-@Table(name = "dogs")
-public class Dog {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int did;
+    private int dogid;
     private String name;
     private String breed;
     private String sex;
     private int age;
     private String status;
-    @JsonIgnoreProperties("dogs")
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "sid")
-    private Shelter shelter;
+    private String shelterid;
 
-    public Dog() {
+    public DogInsert() {
         super();
     }
 
-    public Dog(String name, String breed, String sex, int age, String status, Shelter shelter) {
+    public DogInsert(String name, String breed, String sex, int age, String status, String shelterid) {
         super();
         this.name = name;
         this.breed = breed;
         this.sex = sex;
         this.age = age;
         this.status = status;
-        this.shelter = shelter;
+        this.shelterid = shelterid;
     }
 
-    public int getDid() {
-        return did;
+    public int getDogid() {
+        return dogid;
     }
 
-    public void setDid(int did) {
-        this.did = did;
+    public void setDogid(int dogid) {
+        this.dogid = dogid;
     }
 
     public String getName() {
@@ -84,12 +72,12 @@ public class Dog {
         this.status = status;
     }
 
-    public Shelter getShelter() {
-        return shelter;
+    public String getShelterid() {
+        return shelterid;
     }
 
-    public void setShelter(Shelter shelter) {
-        this.shelter = shelter;
+    public void setShelterid(String shelterid) {
+        this.shelterid = shelterid;
     }
 
 }

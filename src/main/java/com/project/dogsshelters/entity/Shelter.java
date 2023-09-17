@@ -24,6 +24,11 @@ public class Shelter {
         super();
     }
 
+    public Shelter(int sid) {
+        super();
+        this.sid = sid;
+    }
+
     public Shelter(String name, String city, String contactnum) {
         super();
         this.name = name;

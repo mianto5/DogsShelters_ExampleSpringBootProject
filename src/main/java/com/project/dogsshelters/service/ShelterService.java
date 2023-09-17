@@ -32,7 +32,7 @@ public class ShelterService {
 
     public String deleteShelter(String sid) {
         shelterRepo.deleteById(sid);
-        return "Shelter with id = "+sid+" deleted successfully.";
+        return "Shelter with ID = "+sid+" deleted successfully.";
     }
 
 }
