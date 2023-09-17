@@ -2,14 +2,12 @@ package com.project.dogsshelters.controller;
 
 import com.project.dogsshelters.entity.Dog;
 import com.project.dogsshelters.entity.DogInsert;
-import com.project.dogsshelters.entity.Shelter;
 import com.project.dogsshelters.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/dogs")
@@ -19,17 +17,17 @@ public class DogController {
     private DogService dogService;
 
     @GetMapping("/find")
-    public Dog getDogById(@RequestParam String id) {
+    public ResponseEntity getDogById(@RequestParam String id) {
         return dogService.getDogById(id);
     }
 
     @GetMapping("/all")
-    public List<Dog> getAllDogs(){
+    public ResponseEntity getAllDogs(){
         return dogService.getAllDogs();
     }
 
     @GetMapping("/findBySt")
-    public List<Dog> getDogsByStatus(@RequestParam String status){
+    public ResponseEntity getDogsByStatus(@RequestParam String status){
         return dogService.getDogsByStatus(status);
     }
 
@@ -44,7 +42,7 @@ public class DogController {
     }
 
     @DeleteMapping("/delete")
-    public String deleteDog(@RequestParam String id) {
+    public ResponseEntity deleteDog(@RequestParam String id) {
         return dogService.deleteDog(id);
     }
 

@@ -3,10 +3,9 @@ package com.project.dogsshelters.service;
 import com.project.dogsshelters.entity.Shelter;
 import com.project.dogsshelters.repo.ShelterRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShelterService {
@@ -14,25 +13,57 @@ public class ShelterService {
     @Autowired
     private ShelterRepo shelterRepo;
 
-    public Optional<Shelter> getShelterById(String sid) {
-        return shelterRepo.findById(sid);
+    public ResponseEntity getShelterById(String sid) {
+        try {
+            if(!shelterRepo.existsById(sid))
+                throw new Exception("Shelter with ID = " + sid
+                        + " does not exist in the database.");
+            return ResponseEntity.ok(shelterRepo.findById(sid));
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    public List<Shelter> getAllShelters() {
-        return (List<Shelter>) shelterRepo.findAll();
+    public ResponseEntity getAllShelters() {
+        try{
+            return ResponseEntity.ok(shelterRepo.findAll());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    public Shelter addShelter(Shelter shelter) {
-        return shelterRepo.save(shelter);
+    public ResponseEntity addShelter(Shelter shelter) {
+        try{
+            return ResponseEntity.ok(shelterRepo.save(shelter));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    public Shelter editShelter(Shelter shelter) {
-        return shelterRepo.save(shelter);
+    public ResponseEntity editShelter(Shelter shelter) {
+        try {
+            if(!shelterRepo.existsById(String.valueOf(shelter.getSid())))
+                throw new Exception("Shelter with ID = " + shelter.getSid()
+                        + " does not exist in the database.");
+            shelter.setDogs(shelterRepo.findById(String.valueOf(shelter.getSid())).get().getDogs());
+            return ResponseEntity.ok(shelterRepo.save(shelter));
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    public String deleteShelter(String sid) {
-        shelterRepo.deleteById(sid);
-        return "Shelter with ID = "+sid+" deleted successfully.";
+    public ResponseEntity deleteShelter(String sid) {
+        try {
+            if(shelterRepo.existsById(sid))
+                shelterRepo.deleteById(sid);
+            else
+                throw new Exception("Shelter with ID = " + sid
+                        + " does not exist in the database.");
+            return ResponseEntity.ok("Shelter with ID = " + sid
+                    + " deleted successfully.");
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
 }

@@ -19,16 +19,31 @@ public class DogService {
     @Autowired
     private ShelterRepo shelterRepo;
 
-    public Dog getDogById(String did) {
-        return dogRepo.findById(did).orElse(null);
+    public ResponseEntity getDogById(String did) {
+        try {
+            if(!dogRepo.existsById(did))
+                throw new Exception("Dog with ID = " + did
+                        + " does not exist in the database.");
+            return ResponseEntity.ok(dogRepo.findById(did));
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    public List<Dog> getAllDogs() {
-        return (List<Dog>) dogRepo.findAll();
+    public ResponseEntity getAllDogs() {
+        try{
+            return ResponseEntity.ok(dogRepo.findAll());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    public List<Dog> getDogsByStatus(String status) {
-        return (List<Dog>) dogRepo.findByStatus(status);
+    public ResponseEntity getDogsByStatus(String status) {
+        try{
+            return ResponseEntity.ok(dogRepo.findByStatus(status));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     public ResponseEntity addDog(DogInsert dogInsert) {
@@ -37,15 +52,15 @@ public class DogService {
             dog.setShelter(shelterRepo.findById(dogInsert.getShelterid())
                     .orElseThrow(() -> new Exception("Shelter with ID = " + dogInsert.getShelterid()
                             + " does not exist in the database.")));
+            dog.setName(dogInsert.getName());
+            dog.setBreed(dogInsert.getBreed());
+            dog.setSex(dogInsert.getSex());
+            dog.setAge(dogInsert.getAge());
+            dog.setStatus(dogInsert.getStatus());
+            return ResponseEntity.ok(dogRepo.save(dog));
         } catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        dog.setName(dogInsert.getName());
-        dog.setBreed(dogInsert.getBreed());
-        dog.setSex(dogInsert.getSex());
-        dog.setAge(dogInsert.getAge());
-        dog.setStatus(dogInsert.getStatus());
-        return ResponseEntity.ok(dogRepo.save(dog));
     }
 
     public ResponseEntity editDog(DogInsert dogInsert) {
@@ -59,20 +74,29 @@ public class DogService {
             dog.setShelter(shelterRepo.findById(dogInsert.getShelterid())
                     .orElseThrow(() -> new Exception("Shelter with ID = " + dogInsert.getShelterid()
                             + " does not exist in the database.")));
+            dog.setName(dogInsert.getName());
+            dog.setBreed(dogInsert.getBreed());
+            dog.setSex(dogInsert.getSex());
+            dog.setAge(dogInsert.getAge());
+            dog.setStatus(dogInsert.getStatus());
+            return ResponseEntity.ok(dogRepo.save(dog));
         } catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        dog.setName(dogInsert.getName());
-        dog.setBreed(dogInsert.getBreed());
-        dog.setSex(dogInsert.getSex());
-        dog.setAge(dogInsert.getAge());
-        dog.setStatus(dogInsert.getStatus());
-        return ResponseEntity.ok(dogRepo.save(dog));
     }
 
-    public String deleteDog(String did) {
-        dogRepo.deleteById(did);
-        return "Dog with ID = "+did+" deleted successfully.";
+    public ResponseEntity deleteDog(String did) {
+        try {
+            if(dogRepo.existsById(did))
+                dogRepo.deleteById(did);
+            else
+                throw new Exception("Dog with ID = " + did
+                        + " does not exist in the database.");
+            return ResponseEntity.ok("Dog with ID = " + did
+                    + " deleted successfully.");
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
 }
