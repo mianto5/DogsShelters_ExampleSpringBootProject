@@ -1,13 +1,10 @@
 package com.project.dogsshelters.controller;
 
-import com.project.dogsshelters.entity.Dog;
 import com.project.dogsshelters.entity.DogInsert;
 import com.project.dogsshelters.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/dogs")

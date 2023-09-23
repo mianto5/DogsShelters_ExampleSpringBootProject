@@ -3,8 +3,6 @@ package com.project.dogsshelters.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
-import java.util.Optional;
-
 @Entity
 @Table(name = "dogs")
 public class Dog {

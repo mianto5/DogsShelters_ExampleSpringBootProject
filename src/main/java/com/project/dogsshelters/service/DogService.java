@@ -73,7 +73,6 @@ public class DogService {
 
     public ResponseEntity editDog(DogInsert dogInsert) {
         Dog dog = new Dog();
-        System.out.println(dogInsert.getDid());
         try {
             if(dogRepo.existsById(String.valueOf(dogInsert.getDid())))
                 dog.setDid(dogInsert.getDid());
