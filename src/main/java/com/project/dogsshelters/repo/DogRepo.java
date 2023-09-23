@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface DogRepo extends CrudRepository<Dog, String> {
 
+    public List<Dog> findBySex(String sex);
+
     public List<Dog> findByStatus(String status);
 
 }

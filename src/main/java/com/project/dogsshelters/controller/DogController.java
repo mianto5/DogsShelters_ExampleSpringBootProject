@@ -16,8 +16,8 @@ public class DogController {
     @Autowired
     private DogService dogService;
 
-    @GetMapping("/find")
-    public ResponseEntity getDogById(@RequestParam String id) {
+    @GetMapping("/{id}")
+    public ResponseEntity getDogById(@PathVariable String id) {
         return dogService.getDogById(id);
     }
 
@@ -26,7 +26,12 @@ public class DogController {
         return dogService.getAllDogs();
     }
 
-    @GetMapping("/findBySt")
+    @GetMapping("/sex")
+    public ResponseEntity getDogsBySex(@RequestParam String sex){
+        return dogService.getDogsBySex(sex);
+    }
+
+    @GetMapping("/status")
     public ResponseEntity getDogsByStatus(@RequestParam String status){
         return dogService.getDogsByStatus(status);
     }

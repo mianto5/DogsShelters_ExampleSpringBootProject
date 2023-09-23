@@ -2,7 +2,7 @@ package com.project.dogsshelters.entity;
 
 public class DogInsert {
 
-    private int dogid;
+    private int did;
     private String name;
     private String breed;
     private String sex;
@@ -24,12 +24,12 @@ public class DogInsert {
         this.shelterid = shelterid;
     }
 
-    public int getDogid() {
-        return dogid;
+    public int getDid() {
+        return did;
     }
 
-    public void setDogid(int dogid) {
-        this.dogid = dogid;
+    public void setDid(int did) {
+        this.did = did;
     }
 
     public String getName() {

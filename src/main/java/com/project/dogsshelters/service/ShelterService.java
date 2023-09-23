@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ShelterService {
 
@@ -27,6 +29,14 @@ public class ShelterService {
     public ResponseEntity getAllShelters() {
         try{
             return ResponseEntity.ok(shelterRepo.findAll());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    public ResponseEntity getSheltersByCity(String city) {
+        try{
+            return ResponseEntity.ok(shelterRepo.findByCity(city));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -54,8 +64,14 @@ public class ShelterService {
 
     public ResponseEntity deleteShelter(String sid) {
         try {
-            if(shelterRepo.existsById(sid))
-                shelterRepo.deleteById(sid);
+            if(shelterRepo.existsById(sid)) {
+                Shelter shelter = shelterRepo.findById(sid).orElse(new Shelter());
+                if(!shelter.getDogs().isEmpty() && (shelter.getDogs() != null)){
+                    throw new Exception("There are dogs in the shelter, move them first.");
+                }
+                else
+                    shelterRepo.deleteById(sid);
+            }
             else
                 throw new Exception("Shelter with ID = " + sid
                         + " does not exist in the database.");

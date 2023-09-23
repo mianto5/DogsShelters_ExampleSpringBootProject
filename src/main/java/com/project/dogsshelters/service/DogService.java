@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class DogService {
 
@@ -38,6 +36,16 @@ public class DogService {
         }
     }
 
+    public ResponseEntity getDogsBySex(String sex) {
+        try{
+            if(!sex.toLowerCase().equals("pes") && !sex.toLowerCase().equals("fena"))
+                throw new Exception("Invalid sex, choose either 'pes' or 'fena'.");
+            return ResponseEntity.ok(dogRepo.findBySex(sex));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
     public ResponseEntity getDogsByStatus(String status) {
         try{
             return ResponseEntity.ok(dogRepo.findByStatus(status));
@@ -54,9 +62,9 @@ public class DogService {
                             + " does not exist in the database.")));
             dog.setName(dogInsert.getName());
             dog.setBreed(dogInsert.getBreed());
-            dog.setSex(dogInsert.getSex());
+            dog.setSex(dogInsert.getSex().toLowerCase());
             dog.setAge(dogInsert.getAge());
-            dog.setStatus(dogInsert.getStatus());
+            dog.setStatus(dogInsert.getStatus().toLowerCase());
             return ResponseEntity.ok(dogRepo.save(dog));
         } catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -65,20 +73,21 @@ public class DogService {
 
     public ResponseEntity editDog(DogInsert dogInsert) {
         Dog dog = new Dog();
+        System.out.println(dogInsert.getDid());
         try {
-            if(dogRepo.existsById(String.valueOf(dogInsert.getDogid())))
-                dog.setDid(dogInsert.getDogid());
+            if(dogRepo.existsById(String.valueOf(dogInsert.getDid())))
+                dog.setDid(dogInsert.getDid());
             else
-                throw new Exception("Dog with ID = " + dogInsert.getDogid()
+                throw new Exception("Dog with ID = " + dogInsert.getDid()
                             + " does not exist in the database.");
             dog.setShelter(shelterRepo.findById(dogInsert.getShelterid())
                     .orElseThrow(() -> new Exception("Shelter with ID = " + dogInsert.getShelterid()
                             + " does not exist in the database.")));
             dog.setName(dogInsert.getName());
             dog.setBreed(dogInsert.getBreed());
-            dog.setSex(dogInsert.getSex());
+            dog.setSex(dogInsert.getSex().toLowerCase());
             dog.setAge(dogInsert.getAge());
-            dog.setStatus(dogInsert.getStatus());
+            dog.setStatus(dogInsert.getStatus().toLowerCase());
             return ResponseEntity.ok(dogRepo.save(dog));
         } catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

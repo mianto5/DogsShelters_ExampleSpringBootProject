@@ -16,14 +16,19 @@ public class ShelterController {
     @Autowired
     private ShelterService shelterService;
 
-    @GetMapping("/find")
-    public ResponseEntity getShelterById(@RequestParam String id){
+    @GetMapping("/{id}")
+    public ResponseEntity getShelterById(@PathVariable String id){
         return shelterService.getShelterById(id);
     }
 
     @GetMapping("/all")
     public ResponseEntity getAllShelters(){
         return shelterService.getAllShelters();
+    }
+
+    @GetMapping("/city")
+    public ResponseEntity getSheltersByCity(@RequestParam String city){
+        return shelterService.getSheltersByCity(city);
     }
 
     @PostMapping("/add")
