@@ -1,0 +1,367 @@
+{
+	"info": {
+		"_postman_id": "a919845d-944a-4b36-995a-007971a8bcb0",
+		"name": "DogsShelters",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28768762"
+	},
+	"item": [
+		{
+			"name": "Dogs",
+			"item": [
+				{
+					"name": "getDogById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{baseURL}}/dogs/:id",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dogs",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllDogs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/dogs/all",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dogs",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDogsBySex",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{baseURL}}/dogs/sex?sex=pes",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dogs",
+								"sex"
+							],
+							"query": [
+								{
+									"key": "sex",
+									"value": "pes"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDogsByStatus",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{baseURL}}/dogs/status?status=k adopci",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dogs",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "k adopci"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addDog",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Brock\",\r\n    \"breed\": \"Kříženec\",\r\n    \"sex\": \"pes\",\r\n    \"age\": 4,\r\n    \"status\": \"v léčbě\",\r\n    \"shelterid\": 9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/dogs/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dogs",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editDog",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"did\": 11,\r\n    \"name\": \"Brock\",\r\n    \"breed\": \"Kříženec\",\r\n    \"sex\": \"pes\",\r\n    \"age\": 4,\r\n    \"status\": \"v léčbě\",\r\n    \"shelterid\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/dogs/edit",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dogs",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDog",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/dogs/delete?id=2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dogs",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shelters",
+			"item": [
+				{
+					"name": "getShelterById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{baseURL}}/shelters/:id",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"shelters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllShelters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/shelters/all",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"shelters",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSheltersByCity",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{baseURL}}/shelters/city?city=Praha",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"shelters",
+								"city"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Praha"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addShelter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Druhá Šance\",\r\n    \"city\": \"Brno\",\r\n    \"contactnum\": \"+420777222222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/shelters/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"shelters",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editShelter",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sid\": 10,\r\n    \"name\": \"TEST\",\r\n    \"city\": \"Štětí\",\r\n    \"contactnum\": \"+420777777777\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/shelters/edit",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"shelters",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteShelter",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/shelters/delete?id=10",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"shelters",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
